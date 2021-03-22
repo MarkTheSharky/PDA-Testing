@@ -4,12 +4,6 @@ import App from '@/App.vue'
 
 describe('App.vue', () => {
 
-  // let wrapper
-
-  // beforeEach(() => {
-  //   wrapper = shallowMount(App)
-  // })
-
   it('enterNum changes running total', () => {
     const wrapper = shallowMount(App)
     wrapper.vm.previousTotal = 4
@@ -57,12 +51,13 @@ describe('App.vue', () => {
 
   it('should chain multiple operations together', () => {
     const wrapper = shallowMount(App)
-    wrapper.vm.runningTotal = 100
+    wrapper.vm.numberClick('5')
     wrapper.vm.operatorClick('*')
-    wrapper.vm.operatorClick('+')
-    wrapper.vm.operatorClick('/')
+    wrapper.vm.numberClick('2')
+    wrapper.vm.operatorClick('-')
+    wrapper.vm.numberClick('1')
     wrapper.vm.operatorClick('=')
-    expect(wrapper.vm.runningTotal).to.equal(1)
+    expect(wrapper.vm.previousTotal).to.equal(9)
   })
 
   it('should clear the running total without affecting the calculation', () => {
