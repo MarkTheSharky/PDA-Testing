@@ -21,40 +21,69 @@ describe('calculator', () => {
 
   it('arithmetic operations update display with result', () => {
     cy.get('#number1').click();
-    cy.get('#operator_add').click()
+    cy.get('#operator_add').click();
     cy.get('#number5').click();
-    cy.get('#operator_equals').click()
+    cy.get('#operator_equals').click();
     cy.get('.display').should('contain', '6')
   })
 
   it('multiple operations can chain together', () => {
     cy.get('#number1').click();
-    cy.get('#operator_add').click()
+    cy.get('#operator_add').click();
     cy.get('#number5').click();
-    cy.get('#operator_subtract').click()
+    cy.get('#operator_subtract').click();
     cy.get('#number2').click();
-    cy.get('#operator_multiply').click()
+    cy.get('#operator_multiply').click();
     cy.get('#number7').click();
-    cy.get('#operator_equals').click()
+    cy.get('#operator_equals').click();
     cy.get('.display').should('contain', '28')
   })
 
-  xit('', () => {
-
+  it('should output show positive number', () => {
+    cy.get('#number5').click();
+    cy.get('.display').should('contain', '5');
   })
 
-  xit('', () => {
-
+  it('should output show negative number', () => {
+    cy.get('#number5').click();
+    cy.get('#operator_subtract').click();
+    cy.get('#number1').click();
+    cy.get('#number5').click();
+    cy.get('#operator_equals').click();
+    cy.get('.display').should('contain', '-10')
   })
+
+  it('should output show decimals number', () => {
+    cy.get('#number3').click();
+    cy.get('#operator_divide').click();
+    cy.get('#number2').click();
+    cy.get('#operator_equals').click();
+    cy.get('.display').should('contain', '1.5')
+  })
+
+  it('should output show very large number', () => {
+    cy.get('#number1').click();
+    cy.get('#number2').click();
+    cy.get('#number3').click();
+    cy.get('#number4').click();
+    cy.get('#operator_multiply').click();
+    cy.get('#number5').click();
+    cy.get('#number6').click();
+    cy.get('#number7').click();
+    cy.get('#operator_multiply').click();
+    cy.get('#number8').click();
+    cy.get('#number9').click();
+    cy.get('#operator_equals').click();
+    cy.get('.display').should('contain', '62271342')
+  })
+
+  it('should display error when divide by 0', () => {
+    cy.get('#number5').click();
+    cy.get('#number6').click();
+    cy.get('#operator_divide').click();
+    cy.get('#number0').click();
+    cy.get('#operator_equals').click();
+    cy.get('.display').should('contain', 'Error')
+  })
+
 })
-
-
-// Do the number buttons update the display of the running total?
-
-// Do the arithmetical operations update the display with the result of the operation?
-
-// Can multiple operations be chained together?
-
-// Is the output as expected for a range of numbers (for example, positive, negative, decimals and very large numbers)?
-
-// What does the code do in exceptional circumstances? Specifically, if you divide by zero, what is the effect? Write a test to describe what you'd prefer to happen, and then correct the code to make that test pass (you will need to modify the Calculator model to meet this requirement).
