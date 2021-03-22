@@ -27,8 +27,16 @@ describe('calculator', () => {
     cy.get('.display').should('contain', '6')
   })
 
-  xit('multiple operations chain together', () => {
-
+  it('multiple operations can chain together', () => {
+    cy.get('#number1').click();
+    cy.get('#operator_add').click()
+    cy.get('#number5').click();
+    cy.get('#operator_subtract').click()
+    cy.get('#number2').click();
+    cy.get('#operator_multiply').click()
+    cy.get('#number7').click();
+    cy.get('#operator_equals').click()
+    cy.get('.display').should('contain', '28')
   })
 
   xit('', () => {
